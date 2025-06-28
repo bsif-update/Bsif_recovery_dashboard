@@ -1,0 +1,86 @@
+// Expanded BSIF Recovery Dashboard UI - React + Tailwind + Admin Auth + Multi-client View + Live Wallet API import React, { useState, useEffect } from 'react'; import { Card, CardContent } from "@/components/ui/card"; import { Button } from "@/components/ui/button"; import { CheckCircle, Wallet, Download, LogOut } from 'lucide-react'; import axios from 'axios';
+
+const clientsData = [ { client: "Diane Lewis Cinnamon", caseId: "BSIF-203947", scamType: "Pig Butchering Scam", status: "Ready for Disbursement", amount: "$10,970", disbursement: "USDT (TRC20)", wallet: "TPxxxxxxx", documents: [ { name: "Proof of Scam", url: "#" }, { name: "Wallet Statement", url: "#" }, { name: "Recovery Certificate.pdf", url: "#" }, { name: "Refund Ledger Summary.pdf", url: "#" }, ] }, { client: "Erman Cikan", caseId: "BSIF-203948", scamType: "Fake Trading Platform", status: "In Progress", amount: "$200,000", disbursement: "USDT (ERC20)", wallet: "0xABC123...", documents: [ { name: "Scam Chat Logs", url: "#" }, { name: "Crypto Transfers", url: "#" }, ] } ];
+
+export default function Dashboard() { const [loggedIn, setLoggedIn] = useState(false); const [adminPassword, setAdminPassword] = useState(""); const [selectedClient, setSelectedClient] = useState(null); const [walletInfo, setWalletInfo] = useState(null);
+
+const API_KEY = "TJDENsfBJs4RFETt1X1W8wMDc8M5XnJhCe"; // Example for Tronscan or Etherscan API
+
+const handleLogin = () => { if (adminPassword === "bsifsecure2025") { setLoggedIn(true); } };
+
+const fetchWalletInfo = async (walletAddress) => { try { const res = await axios.get(https://api.trongrid.io/v1/accounts/${walletAddress}?apikey=${API_KEY}); setWalletInfo(res.data); } catch (error) { setWalletInfo({ error: "Unable to fetch wallet data." }); } };
+
+if (!loggedIn) { return ( <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4"> <h1 className="text-2xl mb-4">Admin Login - Blocksentinel Dashboard</h1> <input type="password" placeholder="Enter Admin Password" className="mb-4 p-2 text-black rounded" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} /> <Button onClick={handleLogin} className="bg-blue-600 hover:bg-blue-700">Login</Button> </div> ); }
+
+return ( <div className="min-h-screen bg-black text-white px-4 py-8"> <div className="flex justify-between items-center mb-6"> <h1 className="text-3xl font-bold">BSIF Recovery Dashboard</h1> <Button onClick={() => setLoggedIn(false)} className="bg-red-600 hover:bg-red-700"><LogOut className="w-4 h-4 mr-1" /> Logout</Button> </div>
+
+<div className="mb-4">
+    <label className="block mb-2">Select a Client Case:</label>
+    <select
+      className="p-2 rounded text-black"
+      onChange={(e) => {
+        const client = clientsData.find(c => c.caseId === e.target.value);
+        setSelectedClient(client);
+        fetchWalletInfo(client.wallet);
+      }}
+    >
+      <option value="">-- Select Case ID --</option>
+      {clientsData.map(client => (
+        <option key={client.caseId} value={client.caseId}>{client.caseId} - {client.client}</option>
+      ))}
+    </select>
+  </div>
+
+  {selectedClient && (
+    <div className="grid gap-4">
+      <Card className="bg-gray-900 border border-blue-500">
+        <CardContent className="space-y-3 p-4">
+          <h2 className="text-xl font-semibold">Client Case Overview</h2>
+          <p><strong>Client:</strong> {selectedClient.client}</p>
+          <p><strong>Case ID:</strong> {selectedClient.caseId}</p>
+          <p><strong>Scam Type:</strong> {selectedClient.scamType}</p>
+          <p><strong>Status:</strong> <span className="text-green-400">{selectedClient.status}</span></p>
+          <p><strong>Recovered Amount:</strong> {selectedClient.amount}</p>
+          <p><strong>Disbursement Method:</strong> {selectedClient.disbursement}</p>
+          <a href={`https://tronscan.org/#/address/${selectedClient.wallet}`} target="_blank" className="text-blue-400 underline inline-flex items-center"><Wallet className="w-4 h-4 mr-1" /> View Wallet on Tronscan</a>
+        </CardContent>
+      </Card>
+
+      {walletInfo && (
+        <Card className="bg-gray-900 border border-blue-500">
+          <CardContent className="space-y-3 p-4">
+            <h2 className="text-xl font-semibold">Live Wallet Monitoring</h2>
+            <pre className="text-sm text-green-300 whitespace-pre-wrap">
+              {walletInfo.error ? walletInfo.error : JSON.stringify(walletInfo, null, 2)}
+            </pre>
+          </CardContent>
+        </Card>
+      )}
+
+      <Card className="bg-gray-900 border border-blue-500">
+        <CardContent className="space-y-3 p-4">
+          <h2 className="text-xl font-semibold">Case Documents</h2>
+          {selectedClient.documents.map((doc, i) => (
+            <a key={i} href={doc.url} className="flex items-center space-x-2 text-blue-400 underline">
+              <Download className="w-4 h-4" />
+              <span>{doc.name}</span>
+            </a>
+          ))}
+        </CardContent>
+      </Card>
+
+      <div className="text-center">
+        <Button className="bg-blue-600 hover:bg-blue-700 rounded-full px-6 py-2 text-white">
+          <CheckCircle className="w-4 h-4 mr-2" /> Confirm Disbursement Received
+        </Button>
+      </div>
+    </div>
+  )}
+
+  <footer className="mt-12 text-center text-sm text-gray-500">
+    © 2025 Blocksentinel Intel Force | Web3 Watchdogs ⚖️✅
+  </footer>
+</div>
+
+); }
+
