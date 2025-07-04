@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web3 Watchdogs | Link Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0c0f1a;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    .logo {
+      width: 100px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      color: #00ffe5;
+    }
+    p {
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      color: #b0b3b8;
+    }
+    .link {
+      display: block;
+      margin: 1rem auto;
+      width: 90%;
+      max-width: 400px;
+      padding: 1rem;
+      background: #1a1e2d;
+      color: #fff;
+      border: 2px solid #00ffe5;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .link:hover {
+      background: #00ffe5;
+      color: #0c0f1a;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://via.placeholder.com/100x100.png?text=BSIF" alt="Web3 Watchdogs Logo" class="logo" />
+  <h1>Web3 Watchdogs</h1>
+  <p>The Force Behind Your Funds | Scam Hunters ⚖️✅</p><a href="https://forms.gle/your-form-link" class="link">📩 File a Scam Report</a> <a href="https://t.me/BSLF_agent" class="link">💬 Chat with Recovery Agent (Telegram)</a> <a href="https://wa.me/19025006498" class="link">📱 Message on WhatsApp</a> <a href="https://drive.google.com/your-certificates-folder" class="link">🧾 View Recovery Certificates</a> <a href="https://www.instagram.com/web3watchdogs" class="link">📸 Follow on Instagram</a> <a href="https://www.tiktok.com/@web3watchdogs" class="link">🎥 Follow on TikTok</a> <a href="https://bsif.intelforce/docs" class="link">📄 Terms of Engagement</a>
+
+  <footer>
+    &copy; 2025 Web3 Watchdogs | Blocksentinel Intel Force
+  </footer>
+</body>
+</html>
